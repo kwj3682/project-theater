@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="kr.co.movie.dao.ReservationDAO">
+
+<!-- 	<resultMap id="movieMap" type="movie"> -->
+<!-- 		<result column="rating" property="rating" /> -->
+<!-- 	</resultMap> -->
+	<insert id = "insertReservation" parameterType = "reservation">
+		insert into tb_reservations (reservation_no, seat_no, serial, people, id, seat_name_tag)
+		values(s_reservations_reservation_no.nextval, #{seatNo}, #{serial} ,1, #{id},#{seatNameTag})
+	</insert>
+
+	<insert id = "insertReservation2" parameterType = "reservation">
+		insert into tb_reservations (reservation_no, seat_no, serial, people, seat_name_tag)
+		values(s_reservations_reservation_no.nextval, #{seatNo}, #{serial} ,1, #{seatNameTag})
+	</insert>
+
+
+	<select id = "selectReservationListBySerial" parameterType = "int" resultType = "reservation">
+		select r.reservation_no as reservationNo, 
+			   r.people as people, 
+			   r.seat_name_tag as seatNameTag, 
+			   s.theater_no as theaterNo, 
+			   s.play_time as playTime, 
+			   mm.title as title
+    	  from tb_reservations r, tb_seats s, tb_released_movies m, tb_movies mm
+    	 where r.seat_no = s.seat_no
+       		 and s.theater_no = m.theater_no
+       		 and mm.movie_no = m.movie_no
+       		 and r.serial = #{serial}
+	</select>
+	
+	<select id = "selectReservationListById" parameterType = "String" resultType = "reservation">
+		select r.reservation_no as reservationNo, 
+			   r.people as people, 
+			   r.seat_name_tag as seatNameTag, 
+			   s.theater_no as theaterNo, 
+			   s.play_time as playTime, 
+			   mm.title as title
+    	  from tb_reservations r, tb_seats s, tb_released_movies m, tb_movies mm
+    	 where r.seat_no = s.seat_no
+       		 and s.theater_no = m.theater_no
+       		 and mm.movie_no = m.movie_no
+       		 and r.id = #{id}
+	</select>
+	<delete id = "deleteReservation" parameterType = "int">
+		delete
+		  from tb_reservations
+		 where reservation_no = #{reservationNo}
+	</delete>
+	
+	<delete id = "cleanReservationBeforeCurrent">
+			delete
+			  from tb_reservations r
+			 where r.seat_no = (
+			    select seat_no
+			      from tb_seats s
+			     where s.play_time &lt; sysdate
+			        and s.seat_no = r.seat_no
+			    )
+	</delete>
+	
+</mapper>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

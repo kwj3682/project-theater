@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="kr.co.movie.dao.MemberDAO">
+
+	<select id = "selectMemberById" parameterType = "String" resultType = "String">
+		select id
+		  from tb_members
+		 where id = #{id}
+	</select>
+	
+	<select id = "selectMemberById2" parameterType = "String" resultType = "member">
+		select id , password, m_name as mName, address, birth, phone_number as phoneNumber,mail
+		  from tb_members
+		 where id = #{id}
+	</select>
+	
+	<select id = "selectMemberForLogIn" parameterType = "member" resultType = "member">
+		select *
+		  from tb_members
+		 where id = #{id} and password = #{password}
+	</select>
+	
+	
+	<insert id = "insertMember" parameterType = "member">
+		insert into tb_members(id , password, m_name, address, birth, phone_number,mail)
+		values (#{id}, #{password}, #{mName}, #{address}, #{birth}, #{phoneNumber}, #{mail})
+		
+	</insert>
+	
+	<update id = "updatePassword" parameterType = "member">
+		update tb_members
+		  set password = #{password}
+		where id = #{id}
+	</update>
+</mapper>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

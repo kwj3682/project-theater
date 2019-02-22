@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="kr.co.movie.dao.MovieDAO">
+
+	<resultMap id="movieMap" type="movie">
+		<result column="movie_no" property="movieNo" />
+		<result column="title" property="title" />
+		<result column="content" property="content" />
+		<result column="release_date" property="releaseDate" />
+		<result column="rating" property="rating" />
+	</resultMap>
+		
+	<select id="selectMovieList" resultMap="movieMap">
+		select *
+		  from tb_movies 
+	</select>    
+		<resultMap id="rmovieMap" type="releasedMovie">
+		<result column="movie_no" property="movieNo" />
+		<result column="theater_no" property="theaterNo" />
+		<result column="title" property="title" />
+		<result column="release_date" property="releaseDate" />
+		<result column="rating" property="rating" />
+		<result column="seat_cnt" property="seatCnt" />
+	</resultMap>
+	<select id="selectReleasedMovieList" resultMap="rmovieMap">
+	    select r.movie_no,
+		       r.theater_no,
+		       m.title,
+		       m.release_date,
+		       m.rating,
+		       th.seat_cnt
+		  from tb_released_movies r, tb_theaters th, tb_movies m
+		 where th.theater_no = r.theater_no
+		    and r.movie_no = m.movie_no
+	</select>
+	<select id="selectMovieByNo" parameterType = "int"  resultMap="rmovieMap">
+		    select r.movie_no,
+		       r.theater_no,
+		       m.title,
+		       m.release_date,
+		       m.rating,
+		       th.seat_cnt
+		  from tb_released_movies r, tb_theaters th, tb_movies m
+		 where th.theater_no = r.theater_no
+		    and r.movie_no = m.movie_no
+		    and r.movie_no = #{no}
+	</select>
+	
+	<delete id = "deleteMovieFromList" parameterType = "int">
+		  delete 
+			from tb_movies
+		    where movie_no = #{movieNo}
+	</delete>
+		<select id = "insertMovieToList">
+		insert into tb_movies (movie_no, title, content,release_date, rating)
+		values(S_MOVIES_MOVIE_NO.nextval, #{title}, #{content}, #{releaseDate}, #{rating})
+	</select>
+	
+</mapper>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

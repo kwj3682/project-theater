@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="kr.co.movie.dao.TheaterDAO">
+
+	<select id = "getSeatCnt" parameterType = "int" resultType = "int">
+		select seat_cnt
+		  from tb_theaters
+		 where theater_no = #{theaterNo}
+	</select>
+	
+	
+	<select id = "getReDate" parameterType = "int" resultType = "String">
+		select to_char(m.release_date,'yyyy/mm/dd hh24:mi') as releaseDate
+  		  from tb_theaters t, tb_released_movies s, tb_movies m
+ 		 where t.theater_no = s.theater_no
+   			and m.movie_no = s.movie_no
+   			and t.theater_no = #{theaterNo}
+	</select>
+	
+	
+	
+</mapper>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

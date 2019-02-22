@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE configuration PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+	<!-- 설정파일에서 사용할 프로퍼티의 파일의 경로 지정: classpath -->
+	<properties resource="config/mybatis/db.properties"/>
+	
+	<!-- SQL의 결과를 담을 VO 객체들의 별칭을 설정하여 사용의 편의를 도모  
+	-->
+
+	<typeAliases>
+		<typeAlias alias="movie"    	 type="kr.co.movie.domain.Movie" />
+		<typeAlias alias="seat" 		 type="kr.co.movie.domain.Seat" />
+		<typeAlias alias="dseat" 		 type="kr.co.movie.domain.DistinctSeat" />
+		<typeAlias alias="releasedMovie" type="kr.co.movie.domain.ReleasedMovie" />
+		<typeAlias alias="reservation"   type="kr.co.movie.domain.Reservation" />
+		<typeAlias alias="member"  		 type="kr.co.movie.domain.Member" />
+		<typeAlias alias="nonmember"     type="kr.co.movie.domain.NonMember" />
+		<typeAlias alias="history"       type="kr.co.movie.domain.History" />
+		<typeAlias alias="theater"       type="kr.co.movie.domain.Theater" />
+	</typeAliases>
+	
+	<environments default="development">
+		<environment id="development">
+			<transactionManager type="JDBC"/>
+			<dataSource type="POOLED">
+				<property name="driver" value="${driver}" />
+				<property name="url" value="${url}" />
+				<property name="username" value="${username}" />
+				<property name="password" value="${password}" />
+			</dataSource>
+		</environment>
+	</environments>
+
+	<mappers>
+<!-- 		<mapper resource="config/mapper/test1.xml"/> -->
+		<mapper resource="config/mapper/movieList.xml"/>
+		<mapper resource="config/mapper/reservation.xml"/>
+		<mapper resource="config/mapper/seat.xml"/>
+		<mapper resource="config/mapper/releasedMovie.xml"/>
+		<mapper resource="config/mapper/member.xml"/>
+		<mapper resource="config/mapper/history.xml"/>
+		<mapper resource="config/mapper/nonmember.xml"/>
+		<mapper resource="config/mapper/theater.xml"/>
+	</mappers>
+</configuration>
+
+
+
+
+
+
+
+
+
