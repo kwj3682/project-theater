@@ -1,4 +1,4 @@
-# project-theater by woojoong
+# project-theater
 First Project from bitcamp.
 
 # 개요
@@ -29,7 +29,7 @@ First Project from bitcamp.
 ------------
 
 # 소감
--Database와의 연동을 통해 실제 운용 가능한 프로그램처럼 제작, 코드에 대한 분석 능력 및 이해도 증가
--시간 내에 계획에 맞춰 프로그램을 제작하는 방법을 경험
--Naming convention의 중요성을 깨달음
+- Database와의 연동을 통해 실제 운용 가능한 프로그램처럼 제작, 코드에 대한 분석 능력 및 이해도 증가
+- 시간 내에 계획에 맞춰 프로그램을 제작하는 방법을 경험
+- Naming convention의 중요성을 깨달음
 ------------
